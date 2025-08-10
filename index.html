@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Harsha Graphic & Template Design</title>
+  <meta name="description" content="Full single-file website for a graphic design studio: Home, Services, About, Contact, animated service boxes and slides — HTML/CSS/JS." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#7c5cff; --accent-2:#00d4ff; --glass: rgba(255,255,255,0.04);
+      --radius:14px; --max-width:1100px; --gap:18px; --fw: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{font-family:var(--fw);margin:0;background:linear-gradient(180deg,#041027 0%, #061528 60%);color:#e6eef8;line-height:1.45;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max-width);margin:32px auto;padding:24px}
+
+    /* header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;box-shadow:0 6px 20px rgba(124,92,255,0.18)}
+    .logo span{font-size:20px;color:#021025}
+    nav{display:flex;gap:16px;align-items:center}
+    nav a{padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:600}
+    nav a:hover{background:var(--glass);color:#fff}
+    .cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:10px 14px;border-radius:12px;color:#021025;font-weight:700}
+
+    /* hero */
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;margin-top:28px;align-items:center}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:26px;border-radius:18px;box-shadow:0 10px 30px rgba(2,6,23,0.6);backdrop-filter: blur(6px)}
+    .hero-left h1{margin:0;font-size:36px;line-height:1.02}
+    .hero-left p{color:var(--muted);margin-top:12px}
+    .hero-actions{margin-top:18px;display:flex;gap:12px}
+
+    /* services quick grid */
+    .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}
+    .service-box{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));display:flex;gap:12px;align-items:center;cursor:pointer;transition:transform .35s, box-shadow .35s}
+    .service-box:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(2,6,23,0.6)}
+    .icon{width:54px;height:54px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-weight:700}
+    .service-box h4{margin:0}
+    .service-box p{margin:4px 0 0;color:var(--muted);font-size:13px}
+
+    /* slider (right column) */
+    .slider{position:relative;overflow:hidden;border-radius:12px;height:320px}
+    .slides{display:flex;transition:transform .6s cubic-bezier(.2,.9,.2,1);height:100%}
+    .slide{min-width:100%;padding:20px;display:flex;flex-direction:column;gap:12px}
+    .slide img{width:100%;border-radius:10px;object-fit:cover;height:180px}
+    .slide h3{margin:0}
+    .dots{position:absolute;left:12px;bottom:12px;display:flex;gap:8px}
+    .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.14);cursor:pointer}
+    .dot.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 6px 18px rgba(0,0,0,0.4)}
+
+    /* services page */
+    section{margin-top:28px}
+    .services-list{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .service-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:18px;min-height:200px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+
+    /* animated boxes */
+    .service-card .float-box{position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:20px;transform:rotate(25deg);opacity:.12;background:linear-gradient(135deg,var(--accent),var(--accent-2));filter:blur(16px)}
+    .service-card h4{margin:0}
+    .service-card p{color:var(--muted);font-size:14px}
+    .learn{margin-top:auto;display:inline-block;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.03);font-weight:700}
+
+    /* about */
+    .about-grid{display:grid;grid-template-columns:1fr 420px;gap:18px}
+    .stats{display:flex;gap:18px}
+    .stat{background:var(--card);padding:12px;border-radius:10px;text-align:center}
+
+    /* contact */
+    .contact-form{display:flex;flex-direction:column;gap:12px}
+    .contact-form input,.contact-form textarea{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    .contact-form button{padding:12px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));font-weight:700;color:#021025}
+
+    footer{margin-top:30px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .services-list{grid-template-columns:repeat(2,1fr)}
+      .about-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:560px){
+      nav{display:none}
+      .wrap{padding:16px}
+      .services-list{grid-template-columns:1fr}
+    }
+
+    /* small niceties */
+    .badge{display:inline-block;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:700}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo"><span>MS</span></div>
+        <div>
+          <div style="font-weight:800">Harsha Graphic</div>
+          <div style="font-size:12px;color:var(--muted)">Graphic & Template Design</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" href="#contact">Get Quote</a>
+      </nav>
+    </header>
+
+    <main id="home">
+      <div class="hero">
+        <div class="card hero-left">
+          <div class="badge">Full-service • Remote & Onsite</div>
+          <h1>Beautiful design that converts — from concept to final file</h1>
+          <p>We craft brand identities, templates, Photoshop & Illustrator artwork, PageMaker and Microsoft design assets — ready for web, print and presentations.</p>
+          <div class="hero-actions">
+            <a class="cta" href="#services">Our Services</a>
+            <a style="padding:10px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);font-weight:700" href="#contact">Contact Us</a>
+          </div>
+
+          <div class="services-grid" style="margin-top:22px">
+            <div class="service-box" data-service="Graphic Design">
+              <div class="icon">G</div>
+              <div>
+                <h4>Graphic Design</h4>
+                <p>Logos, layouts, posters, branding systems.</p>
+              </div>
+            </div>
+            <div class="service-box" data-service="Template Design">
+              <div class="icon">T</div>
+              <div>
+                <h4>Template Design</h4>
+                <p>PowerPoint, Keynote, InDesign, PageMaker templates.</p>
+              </div>
+            </div>
+            <div class="service-box" data-service="Photoshop">
+              <div class="icon">Ps</div>
+              <div>
+                <h4>Photoshop Design</h4>
+                <p>Retouching, composites, banners and mockups.</p>
+              </div>
+            </div>
+            <div class="service-box" data-service="Illustrator">
+              <div class="icon">Ai</div>
+              <div>
+                <h4>Adobe Illustrator</h4>
+                <p>Vector illustrations, icons, and packaging art.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card">
+          <div class="slider" aria-hidden="false">
+            <div class="slides" id="slides">
+              <div class="slide">
+                <img alt="Portfolio 1" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='600'><rect width='100%' height='100%' fill='%230a1220'/><text x='50%' y='50%' fill='%237c5cff' font-size='40' font-family='Inter' text-anchor='middle'>Portfolio Sample 1</text></svg>">
+                <h3>Brand Identity — CoffeeHaus</h3>
+                <p class="muted">Full brand guidelines, logo suite, and packaging mockups.</p>
+              </div>
+              <div class="slide">
+                <img alt="Portfolio 2" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='600'><rect width='100%' height='100%' fill='%230a1220'/><text x='50%' y='50%' fill='%2300d4ff' font-size='40' font-family='Inter' text-anchor='middle'>Template Sample</text></svg>">
+                <h3>Presentation Templates</h3>
+                <p class="muted">Editable PowerPoint and Google Slides templates for teams.</p>
+              </div>
+              <div class="slide">
+                <img alt="Portfolio 3" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='600'><rect width='100%' height='100%' fill='%230a1220'/><text x='50%' y='50%' fill='%23ffffff' font-size='40' font-family='Inter' text-anchor='middle'>Illustration Pack</text></svg>">
+                <h3>Vector Illustration Pack</h3>
+                <p class="muted">Scalable icons & scenes for web and print projects.</p>
+              </div>
+            </div>
+            <div class="dots" id="dots"></div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Services section -->
+      <section id="services">
+        <div class="card">
+          <h2>Services</h2>
+          <p style="color:var(--muted)">We offer hands-on design work and ready-to-use templates across multiple tools and platforms. Click a card to learn more.</p>
+
+          <div class="services-list" style="margin-top:18px">
+            <!-- Service example: Graphic Design -->
+            <article class="service-card" data-slug="graphic-design">
+              <div class="float-box" aria-hidden="true"></div>
+              <h4>Graphic Design</h4>
+              <p>Create memorable logos, posters, and marketing collateral — built for print and digital. Files delivered: AI, PDF, SVG, high-res PNG.</p>
+              <ul style="color:var(--muted);font-size:13px;margin:0;padding-left:18px">
+                <li>Brand identity & style guides</li>
+                <li>Poster, flyer & brochure layouts</li>
+                <li>Print-ready exports & bleed setups</li>
+              </ul>
+              <a class="learn" href="#contact">Request a Quote</a>
+            </article>
+
+            <article class="service-card" data-slug="template-design">
+              <div class="float-box" aria-hidden="true"></div>
+              <h4>Template Design</h4>
+              <p>Custom templates for PowerPoint, Keynote, InDesign, PageMaker and Microsoft Word/Publisher that your team can reuse.</p>
+              <ul style="color:var(--muted);font-size:13px;margin:0;padding-left:18px">
+                <li>Company decks & investor templates</li>
+                <li>PageMaker -> InDesign migration</li>
+                <li>Editable master slides and components</li>
+              </ul>
+              <a class="learn" href="#contact">Get Started</a>
+            </article>
+
+            <article class="service-card" data-slug="photoshop">
+              <div class="float-box" aria-hidden="true"></div>
+              <h4>Photoshop Services</h4>
+              <p>Advanced retouching, catalog image prep, composites, and web banners. PSDs organized with smart objects and non-destructive edits.</p>
+              <ul style="color:var(--muted);font-size:13px;margin:0;padding-left:18px">
+                <li>Batch actions & export scripts</li>
+                <li>Web-optimized and print-ready versions</li>
+                <li>Layered, documented PSD delivery</li>
+              </ul>
+              <a class="learn" href="#contact">Inquire</a>
+            </article>
+
+            <article class="service-card" data-slug="illustrator">
+              <div class="float-box" aria-hidden="true"></div>
+              <h4>Adobe Illustrator</h4>
+              <p>Vectors & icons, packaging dielines, and infographics — supplied as AI, EPS, and SVG files with clear artboards and separations.</p>
+              <ul style="color:var(--muted);font-size:13px;margin:0;padding-left:18px">
+                <li>Logo vectors & responsive marks</li>
+                <li>Icon systems & illustrations</li>
+                <li>Packaging artwork & dieline setup</li>
+              </ul>
+              <a class="learn" href="#contact">Start Project</a>
+            </article>
+
+            <article class="service-card" data-slug="pagemaker-ms-tools">
+              <div class="float-box" aria-hidden="true"></div>
+              <h4>PageMaker & Microsoft Tools</h4>
+              <p>Legacy PageMaker files migrated and modernized; Word and Publisher layouts; clean PowerPoint templates and Excel dashboard visuals.</p>
+              <ul style="color:var(--muted);font-size:13px;margin:0;padding-left:18px">
+                <li>PageMaker -> InDesign updates</li>
+                <li>Microsoft Word/Publisher layouts</li>
+                <li>Excel chart styling & export-ready sheets</li>
+              </ul>
+              <a class="learn" href="#contact">Consult</a>
+            </article>
+
+            <article class="service-card" data-slug="production-support">
+              <div class="float-box" aria-hidden="true"></div>
+              <h4>Production & Handoff</h4>
+              <p>Color profiles, marks, preflight checklists and print-ready packages. We hand off developer-ready assets for web implementation.</p>
+              <a class="learn" href="#contact">Talk Production</a>
+            </article>
+
+            <article class="service-card" data-slug="training">
+              <div class="float-box" aria-hidden="true"></div>
+              <h4>Training & Documentation</h4>
+              <p>Internal documentation, branded templates teaching sessions, and recorded how-tos for your team to keep designs consistent.</p>
+              <a class="learn" href="#contact">Book Training</a>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about">
+        <div class="card about-grid">
+          <div>
+            <h2>About BrightPixel</h2>
+            <p style="color:var(--muted)">We are a small team of designers and production specialists focused on scalable design systems and easy-to-use templates. We partner with agencies and in-house teams.</p>
+            <div class="stats" style="margin-top:18px">
+              <div class="stat"><div style="font-size:20px;font-weight:800">8+</div><div style="color:var(--muted);font-size:13px">Years</div></div>
+              <div class="stat"><div style="font-size:20px;font-weight:800">350+</div><div style="color:var(--muted);font-size:13px">Projects</div></div>
+              <div class="stat"><div style="font-size:20px;font-weight:800">120+</div><div style="color:var(--muted);font-size:13px">Happy clients</div></div>
+            </div>
+          </div>
+          <div>
+            <div style="background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px">
+              <h4>Our Process</h4>
+              <ol style="color:var(--muted);margin-left:18px">
+                <li>Discovery & brief</li>
+                <li>Wireframes / moodboards</li>
+                <li>Design & review</li>
+                <li>Handoff & production
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact">
+        <div class="card">
+          <h2>Contact</h2>
+          <p style="color:var(--muted)">Tell us about your project — the toolset you prefer (Photoshop, Illustrator, PageMaker, PowerPoint, etc.) and the deliverables you need.</p>
+          <form class="contact-form" id="contactForm" onsubmit="return handleContact(event)">
+            <input id="name" placeholder="Full name" required />
+            <input id="email" placeholder="Email" type="email" required />
+            <input id="project" placeholder="Project title (eg. Brand refresh)" />
+            <textarea id="message" rows="6" placeholder="Project details, preferred formats, deadline"></textarea>
+            <div style="display:flex;gap:12px;align-items:center">
+              <button type="submit">Send message</button>
+              <div style="color:var(--muted);font-size:13px">Or email: <strong style="color:#fff">mallipatboy96@gmail.com</strong></div>
+            </div>
+            <div id="formResult" style="color:var(--muted);font-size:13px;margin-top:8px"></div>
+          </form>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      © <span id="year"></span> BrightPixel Studio — Crafted with care. • Designed for Photoshop, Illustrator, PageMaker, and Microsoft tools.
+    </footer>
+  </div>
+
+  <script>
+    // small helpers: slider
+    const slidesEl = document.getElementById('slides');
+    const dotsEl = document.getElementById('dots');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let idx = 0;
+
+    function buildDots(){
+      slides.forEach((s,i)=>{
+        const d = document.createElement('div'); d.className='dot'+(i===0?' active':''); d.dataset.index=i; d.addEventListener('click',()=>goTo(i)); dotsEl.appendChild(d);
+      })
+    }
+    function goTo(i){ idx = i; update(); }
+    function update(){ slidesEl.style.transform = `translateX(-${idx*100}%)`; document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active', i===idx)) }
+    buildDots();
+    setInterval(()=>{ idx = (idx+1) % slides.length; update(); },4500);
+
+    // service-box click reveals small quick alert (can be replaced with modal)
+    document.querySelectorAll('.service-box').forEach(el=>{
+      el.addEventListener('click', ()=>{
+        const s = el.dataset.service || 'Service';
+        alert(s + ' — Click any card below for full details or contact us.');
+      })
+    })
+
+    // contact form (mock): won't actually send email but validates and shows success (placeholder)
+    function handleContact(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const project = document.getElementById('project').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const result = document.getElementById('formResult');
+      if(!name || !email){ result.textContent = 'Please include your name and email.'; return false; }
+      // simulate success
+      result.style.color = 'lightgreen'; result.textContent = 'Thanks — we received your message. We will reply within 1-2 business days.';
+      e.target.reset();
+      return false;
+    }
+
+    // small nicety: auto year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // optional: hook up service-card to scroll to contact
+    document.querySelectorAll('.service-card .learn').forEach(a=>{
+      a.addEventListener('click', (ev)=>{
+        ev.preventDefault(); document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+      })
+    })
+  </script>
+</body>
+</html>
+
